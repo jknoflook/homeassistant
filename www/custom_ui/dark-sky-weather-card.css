@@ -1,0 +1,150 @@
+.clear {
+  clear: both;
+}
+
+.card {
+  background: url(/local/pictures/summer_day.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: auto;
+  padding-top: 2em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  position: relative;
+}
+
+.ha-icon {
+  height: 18px;
+  margin-right: 5px;
+  color: var(--paper-item-icon-color);
+}
+.div{
+  width: 90%;
+  position: inherit;
+  left: 5%;
+  margin: 0 auto;
+  display: inline-block;
+  height: auto;
+}
+.div1 {
+  width: auto;
+  vertical-align: -1em;
+  padding-left: 10%;
+  padding-top: 4%
+}
+.div4 {
+  float: right;
+  width: auto;
+  vertical-align: -1em;
+}
+.iconbigger {
+  background: none;
+  background-size: contain;
+  width: 5.5em;
+  height: 5.5em;
+  vertical-align: -2.4em;
+}
+.temp {
+  text-align: right;
+  width: auto;
+  margin-left: 5px;
+  font-weight: 300;
+  font-size: 5em;
+  vertical-align: -0.5em;
+  color: var(--primary-text-color);
+}
+
+.tempc {
+  text-align: left;
+  width: auto;
+  font-weight: 300;
+  font-size: 1.5em;
+  margin-left: 5px;
+
+  color: var(--primary-text-color);
+}
+
+.variations {
+  font-weight: 300;
+  color: var(--primary-text-color);
+  list-style: none;
+}
+
+
+.variations.right {
+  margin-left: 0em;
+  margin-right: 1em;
+}
+
+
+.forecast {
+  width: 100%;
+  margin: 1 auto;
+  height: 9em;
+}
+
+.topinfo {
+  display: block;
+  width: 25%;
+  float: left;
+  text-align: left;
+  box-sizing: border-box;
+}
+.day {
+  display: block;
+  width: 20%;
+  float: left;
+  text-align: center;
+  color: var(--primary-text-color);
+  border-right: .1em solid #d9d9d9;
+  line-height: 2;
+  box-sizing: border-box;
+}
+
+.dayname {
+  text-transform: uppercase;
+}
+
+.forecast .day:first-child {
+  margin-left: 0;
+}
+
+.forecast .day:nth-last-child(1) {
+  border-right: none;
+  margin-right: 0;
+}
+
+.highTemp {
+  font-weight: bold;
+}
+
+.lowTemp {
+  color: var(--secondary-text-color);
+}
+
+
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+}
+
+.weather {
+  font-weight: 300;
+  font-size: 1.5em;
+  color: var(--primary-text-color);
+  text-align: left;
+  position: absolute;
+  top: -0.5em;
+  left: 6em;
+  word-wrap: break-word;
+  width: 30%;
+}
