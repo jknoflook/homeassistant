@@ -2,17 +2,6 @@
   clear: both;
 }
 
-.card {
-  background: url(/local/pictures/summer_day.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: auto;
-  padding-top: 2em;
-  padding-bottom: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  position: relative;
-}
 
 .ha-icon {
   height: 18px;

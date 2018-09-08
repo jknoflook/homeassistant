@@ -88,6 +88,7 @@ class DarkSkyWeatherCard extends HTMLElement {
     const temperature = Math.round(hass.states[this.config.entity_temperature].state);
     const visibility = hass.states[this.config.entity_visibility].state;
     const windBearing = windDirections[(Math.round((hass.states[this.config.entity_wind_bearing].state / 360) * 16))];
+    const weathercardbackground = this.config.entity_background;
     const windSpeed = Math.round(hass.states[this.config.entity_wind_speed].state);
     const forecast1 = { date: forecastDate1,
     				   condition: this.config.entity_forecast_icon_1,
@@ -114,6 +115,9 @@ class DarkSkyWeatherCard extends HTMLElement {
 
 
     this.content.innerHTML = `
+
+
+    <div style="background: url(/local/pictures/${weathercardbackground}) no-repeat; background-size: cover; margin: auto; padding-top: 2em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; position: relative">
     <div style="background: rgba(0, 0, 0, 0.55); /* Black background with transparency */">
     <div class="div" style="padding-left: 2%, padding-right: 2%">
       <div class="div div1">
@@ -142,7 +146,7 @@ class DarkSkyWeatherCard extends HTMLElement {
             <br><span class="highTemp">${Math.round(hass.states[daily.temphigh].state)}${getUnit('temperature')}</span>
             <br><span class="lowTemp">${Math.round(hass.states[daily.templow].state)}${getUnit('temperature')}</span>
           </div>`).join('')}
-    </div></div>`;
+    </div></div></div>`;
   }
 
   setConfig(config) {
@@ -152,7 +156,8 @@ class DarkSkyWeatherCard extends HTMLElement {
      		!config.entity_temperature ||
     		!config.entity_visibility ||
     		!config.entity_wind_bearing ||
-    		!config.entity_wind_speed) {
+    		!config.entity_wind_speed ||
+        !config.entity_background) {
       throw new Error('Please define entities');
     }
     this.config = config;
