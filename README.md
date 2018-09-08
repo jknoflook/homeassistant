@@ -8,9 +8,7 @@ entity_background: filename
 
 example:
 entity_background: summer_day.jpg
-
-
-my lovelace-ui configuration
+'''
      - type: custom:dark-sky-weather-card
         entity_sun: sun.sun
         entity_background: summer_day.jpg
@@ -37,3 +35,4 @@ my lovelace-ui configuration
         entity_forecast_icon_3: sensor.dark_sky_icon_3
         entity_forecast_icon_4: sensor.dark_sky_icon_4
         entity_forecast_icon_5: sensor.dark_sky_icon_5
+        '''
