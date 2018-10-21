@@ -2,7 +2,7 @@
 
 A card developed for Lovelace to mimic the look of the ecobee thermostat.
 
-![ecobee screenshot](images/ecobee.png)
+![ecobee](https://github.com/jknoflook/homeassistant/blob/master/images/ecobee.png)
 
 **Options**
 
