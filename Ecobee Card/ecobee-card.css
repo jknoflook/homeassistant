@@ -1,0 +1,109 @@
+.clear {
+  clear: both;
+}
+.ecobee_card {
+  background-color: #000000;
+  height: 26em;
+  width: 100%;
+  display: flex;
+}
+.ecobee1 {
+  left: 0px;
+  font-family: "Gotham", arial;
+  text-align: center;
+  margin: .5em;
+}
+.ecobee_div {
+  font-size: 1.3em;
+}
+
+.ecobee_temperature {
+  margin: .5em;
+  padding: .5em .5em .5em .5em;
+  font-size: 4.2em;
+  font-weight: 300;
+}
+.ecobee_humidity {
+  align-self: center;
+  line-height: 1em;
+  font-size: 1.5em;
+}
+.ecobee_mode {
+  color: #fff;
+  padding:1em 1em 1em 1em;
+}
+
+.setpoint {
+  height: 50px;
+  width: 50px;
+  background-color: #000000;
+  border: 2px solid white;
+  -moz-border-radius: 10%;
+  -webkit-border-radius: 10%;
+  border-radius: 50%;
+  display: block;
+  top: 11.8em;
+  align: center;
+  position: absolute;
+}
+.setpoint_font {
+  font-weight: 800;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  top: 16px;
+}
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: orange;
+  border-radius: 50%;
+  margin: calc((26em/10)/2);
+  display: block; 
+}
+.dot1 {
+  height: 4px;
+  width: 4px;
+}
+.dot2 {
+  height: 5px;
+  width: 5px;
+}
+.dot3 {
+  height: 6px;
+  width: 6px;
+}
+.dot4 {
+  height: 7px;
+  width: 7px;
+}
+.dot5 {
+  height: 8px;
+  width: 8px;
+}
+.dot6 {
+  height: 9px;
+  width: 9px;
+}
+
+
+.grid-container {
+  display: grid;
+  width: 95%;
+  grid-template-columns: auto auto auto;
+  margin: 10px;
+}
+.grid-item {
+  width: 1%;
+  background-color: #000000;
+  padding: 2px;
+  font-size: 30px;
+  text-align: center;
+}
+.grid_circles {
+  grid-row: 1 / span 5;
+  grid-column: 3;
+  width: 18%;
+  align-self: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
