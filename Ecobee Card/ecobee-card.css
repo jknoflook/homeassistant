@@ -3,6 +3,7 @@
 }
 .ecobee_card {
   background-color: #000000;
+  color: #ffffff;
   height: 26em;
   width: 100%;
   display: flex;
