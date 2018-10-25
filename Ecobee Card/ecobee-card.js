@@ -84,7 +84,7 @@ class EcobeeCard extends HTMLElement {
         <div class="ecobee_card">
           <div class="grid-container">
             <div class="grid-item"></div>
-            <div class="ecobee1 ecobee_mod">
+            <div class="ecobee1 ecobee_mode">
               ${icon_operation_mode}
             </div>
             <div class="grid_circles">
