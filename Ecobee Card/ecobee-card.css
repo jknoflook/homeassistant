@@ -33,7 +33,32 @@
   color: #fff;
   padding:1em 1em 1em 1em;
 }
-
+.setpoint_cool_auto {
+  height: 50px;
+  width: 50px;
+  background-color: #000000;
+  border: 2px solid white;
+  -moz-border-radius: 10%;
+  -webkit-border-radius: 10%;
+  border-radius: 50%;
+  display: block;
+  top: 14.8em;
+  align: center;
+  position: absolute;
+}
+.setpoint_heat_auto {
+  height: 50px;
+  width: 50px;
+  background-color: #000000;
+  border: 2px solid white;
+  -moz-border-radius: 10%;
+  -webkit-border-radius: 10%;
+  border-radius: 50%;
+  display: block;
+  top: 8.8em;
+  align: center;
+  position: absolute;
+}
 .setpoint {
   height: 50px;
   width: 50px;
@@ -50,17 +75,33 @@
 .setpoint_font {
   font-weight: 800;
   text-align: center;
-  color: #ffffff;
   position: relative;
   top: 16px;
+}
+.operation_cool_color {
+  color: #56C0EA;
+}
+.operation_heat_color {
+  color: orange;
+}
+.operation_neutral_color {
+  color: #ffffff;
+}
+.dot_cool_color {
+  background-color: #56C0EA;
+}
+.dot_heat_color {
+  background-color: orange;
+}
+.dot_neutral_color {
+  background-color: #ffffff;
 }
 .dot {
   height: 10px;
   width: 10px;
-  background-color: orange;
   border-radius: 50%;
   margin: calc((26em/10)/2);
-  display: block; 
+  display: block;
 }
 .dot1 {
   height: 4px;
@@ -108,3 +149,4 @@
   align-self: center;
   background-color: rgba(0, 0, 0, 0.8);
 }
+
