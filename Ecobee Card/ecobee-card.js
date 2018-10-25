@@ -34,6 +34,8 @@ class EcobeeCard extends HTMLElement {
       const home_temperature = hass.states[this.config.entity].attributes.current_temperature;
       const humidity = hass.states[this.config.entity].attributes.actual_humidity;
       const temperature_setting = hass.states[this.config.entity].attributes.temperature;
+      const temperature_high_setting = hass.states[this.config.entity].attributes.target_temp_high;
+      const temperature_low_setting = hass.states[this.config.entity].attributes.target_temp_low;
       const operation_mode = hass.states[this.config.entity].attributes.operation_mode;
 
       const transform_operation_mode = {
@@ -78,8 +80,68 @@ class EcobeeCard extends HTMLElement {
               </svg>`,
           "off": "off",
       }
+      const transform_spt_operation_mode = {
+        "heat": `<span class="setpoint"><div class="setpoint_font operation_heat_color">
+                   ${temperature_setting}
+                 </div></span>`,
+        "cool": `<span class="setpoint"><div class="setpoint_font operation_cool_color">
+                   ${temperature_setting}
+                 </div></span>`,
+        "auto": `<span class="setpoint_heat_auto"><div class="setpoint_font operation_heat_color">
+                   ${temperature_high_setting}
+                 </div></span>
+                 <span class="setpoint_cool_auto"><div class="setpoint_font operation_cool_color">
+                    ${temperature_low_setting}
+                 </div></span>`,
+        "off": ``,
+      }
+      const transform_botdot = {
+        "heat": "dot_heat_color",
+        "cool": "dot_neutral_color",
+        "auto": "dot_heat_color",
+        "off": "#000000",
+      }
+      const transform_midbotdot = {
+        "heat": "dot_heat_color",
+        "cool": "dot_neutral_color",
+        "auto": "dot_neutral_color",
+        "off": "#000000",
+      }
+      const transform_midtopdot = {
+        "heat": "dot_neutral_color",
+        "cool": "dot_cool_color",
+        "auto": "dot_neutral_color",
+        "off": "#000000",
+      }
+      const transform_topdot = {
+        "heat": "dot_neutral_color",
+        "cool": "dot_cool_color",
+        "auto": "dot_neutral_color",
+        "off": "#000000",
+      }
+
+      const transform_climate_mode_icon  = {
+        "Sleep": `<ha-icon icon="mdi:power-sleep"></ha-icon> Sleep`,
+        "Home":  `<ha-icon icon="mdi:home"></ha-icon> Home`,
+        "Away": `<ha-icon icon="mdi:key-variant"></ha-icon> Away`,
+      }
+      const climate_mode = transform_climate_mode_icon[hass.states[
+        this.config.entity].attributes.climate_mode];
       const icon_operation_mode = transform_operation_mode[hass.states[
         this.config.entity].attributes.operation_mode];
+      const spt_operation_mode = transform_spt_operation_mode[hass.states[
+        this.config.entity].attributes.operation_mode];
+      const botdot = transform_botdot[hass.states[
+        this.config.entity].attributes.operation_mode];
+
+      const midbotdot = transform_midbotdot[hass.states[
+        this.config.entity].attributes.operation_mode];
+      const midtopdot = transform_midtopdot[hass.states[
+        this.config.entity].attributes.operation_mode];
+      const topdot = transform_topdot[hass.states[
+        this.config.entity].attributes.operation_mode];
+
+
       this.content.innerHTML = `
         <div class="ecobee_card">
           <div class="grid-container">
@@ -88,23 +150,19 @@ class EcobeeCard extends HTMLElement {
               ${icon_operation_mode}
             </div>
             <div class="grid_circles">
-  	          <span class="dot dot1"></span>
-              <span class="dot dot2"></span>
-              <span class="dot dot3"></span>
-              <span class="dot dot4"></span>
-              <span class="dot dot5"></span>
-              <span class="dot dot6"></span>
-              <span class="setpoint">
-                <div class="setpoint_font">
-                  ${temperature_setting}
-                </div>
-              </span>
-              <span class="dot dot6"></span>
-              <span class="dot dot5"></span>
-              <span class="dot dot4"></span>
-              <span class="dot dot3"></span>
-              <span class="dot dot2"></span>
-              <span class="dot dot1"></span>
+  	          <span class="dot dot1 ${topdot}"></span>
+              <span class="dot dot2 ${topdot}"></span>
+              <span class="dot dot3 ${topdot}"></span>
+              <span class="dot dot4 ${topdot}"></span>
+              <span class="dot dot5 ${topdot}"></span>
+              <span class="dot dot6 ${midtopdot}"></span>
+                ${spt_operation_mode}
+              <span class="dot dot6 ${midtopdot}"></span>
+              <span class="dot dot5 ${botdot}"></span>
+              <span class="dot dot4 ${botdot}"></span>
+              <span class="dot dot3 ${botdot}"></span>
+              <span class="dot dot2 ${botdot}"></span>
+              <span class="dot dot1 ${botdot}"></span>
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_humidity">
@@ -116,7 +174,7 @@ class EcobeeCard extends HTMLElement {
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_div">
-              <ha-icon icon="mdi:home"></ha-icon>home
+              ${climate_mode}
             </div>
           </div>
         </div>
