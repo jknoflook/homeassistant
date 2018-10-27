@@ -1,7 +1,7 @@
 {
     "ecobee-card": {
-      "updated_at": "2018-10-25",
-      "version": "0.0.2",
+      "updated_at": "2018-10-27",
+      "version": "0.0.3",
       "remote_location": "https://raw.githubusercontent.com/jknoflook/homeassistant/master/Ecobee%20Card/ecobee-card.js",
       "visit_repo": "https://github.com/jknoflook/homeassistant/tree/master/Ecobee%20Card",
       "changelog": "https://github.com/jknoflook/homeassistant/tree/master/Ecobee%20Card/releases/latest"
