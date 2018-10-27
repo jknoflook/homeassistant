@@ -31,12 +31,7 @@ class EcobeeCard extends HTMLElement {
         this.appendChild(card);
       }
 
-      const home_temperature = hass.states[this.config.entity].attributes.current_temperature;
-      const humidity = hass.states[this.config.entity].attributes.actual_humidity;
-      const temperature_setting = hass.states[this.config.entity].attributes.temperature;
-      const temperature_high_setting = hass.states[this.config.entity].attributes.target_temp_high;
-      const temperature_low_setting = hass.states[this.config.entity].attributes.target_temp_low;
-      const operation_mode = hass.states[this.config.entity].attributes.operation_mode;
+      const stateObj = hass.states[this.config.entity];
 
       const transform_operation_mode = {
           "heat": `<svg style="width:35px;height:35px" viewBox="0 0 24 24">
@@ -80,21 +75,6 @@ class EcobeeCard extends HTMLElement {
               </svg>`,
           "off": "off",
       }
-      const transform_spt_operation_mode = {
-        "heat": `<span class="setpoint"><div class="setpoint_font operation_heat_color">
-                   ${temperature_setting}
-                 </div></span>`,
-        "cool": `<span class="setpoint"><div class="setpoint_font operation_cool_color">
-                   ${temperature_setting}
-                 </div></span>`,
-        "auto": `<span class="setpoint_heat_auto"><div class="setpoint_font operation_heat_color">
-                   ${temperature_high_setting}
-                 </div></span>
-                 <span class="setpoint_cool_auto"><div class="setpoint_font operation_cool_color">
-                    ${temperature_low_setting}
-                 </div></span>`,
-        "off": ``,
-      }
       const transform_botdot = {
         "heat": "dot_heat_color",
         "cool": "dot_neutral_color",
@@ -125,22 +105,42 @@ class EcobeeCard extends HTMLElement {
         "Home":  `<ha-icon icon="mdi:home"></ha-icon> Home`,
         "Away": `<ha-icon icon="mdi:key-variant"></ha-icon> Away`,
       }
-      const climate_mode = transform_climate_mode_icon[hass.states[
-        this.config.entity].attributes.climate_mode];
-      const icon_operation_mode = transform_operation_mode[hass.states[
-        this.config.entity].attributes.operation_mode];
-      const spt_operation_mode = transform_spt_operation_mode[hass.states[
-        this.config.entity].attributes.operation_mode];
-      const botdot = transform_botdot[hass.states[
-        this.config.entity].attributes.operation_mode];
 
-      const midbotdot = transform_midbotdot[hass.states[
-        this.config.entity].attributes.operation_mode];
-      const midtopdot = transform_midtopdot[hass.states[
-        this.config.entity].attributes.operation_mode];
-      const topdot = transform_topdot[hass.states[
-        this.config.entity].attributes.operation_mode];
-
+      const midbotdot = transform_midbotdot[stateObj.attributes.operation_mode];
+      const midtopdot = transform_midtopdot[stateObj.attributes.operation_mode];
+      const topdot = transform_topdot[stateObj.attributes.operation_mode];
+      const transform_spt_operation_mode = {
+        "heat": `<span class="dot dot6 ${midtopdot}"></span>
+                 <div class="setpoint setpoint_heatcool operation_heat_color">
+                  <p style="margin-top: 16px">
+                   ${stateObj.attributes.temperature}
+                  </p>
+                 </div>
+                 <span class="dot dot6 ${midbotdot}"></span>`,
+        "cool": `<span class="dot dot6 ${midtopdot}"></span>
+                 <span class="setpoint setpoint_heatcool operation_cool_color">
+                  <p style="margin-top: 16px">
+                   ${stateObj.attributes.temperature}
+                  </p>
+                 </span>
+                 <span class="dot dot6 ${midbotdot}"></span>`,
+        "auto": `<span class="setpoint setpoint_auto operation_heat_color">
+                  <p style="margin-top: 12px">
+                   ${stateObj.attributes.target_temp_high}
+                  </p>
+                 </span>
+                 <span class="dot dot6 ${midbotdot}"></span>
+                 <span class="setpoint setpoint_auto operation_cool_color">
+                   <p style="margin-top: 12px">
+                     ${stateObj.attributes.target_temp_low}
+                   </p>
+                </span>`,
+        "off": ``,
+      }
+      const climate_mode = transform_climate_mode_icon[stateObj.attributes.climate_mode];
+      const icon_operation_mode = transform_operation_mode[stateObj.attributes.operation_mode];
+      const spt_operation_mode = transform_spt_operation_mode[stateObj.attributes.operation_mode];
+      const botdot = transform_botdot[stateObj.attributes.operation_mode];
 
       this.content.innerHTML = `
         <div class="ecobee_card">
@@ -154,11 +154,7 @@ class EcobeeCard extends HTMLElement {
               <span class="dot dot2 ${topdot}"></span>
               <span class="dot dot3 ${topdot}"></span>
               <span class="dot dot4 ${topdot}"></span>
-              <span class="dot dot5 ${topdot}"></span>
-              <span class="dot dot6 ${midtopdot}"></span>
-                ${spt_operation_mode}
-              <span class="dot dot6 ${midtopdot}"></span>
-              <span class="dot dot5 ${botdot}"></span>
+              ${spt_operation_mode}
               <span class="dot dot4 ${botdot}"></span>
               <span class="dot dot3 ${botdot}"></span>
               <span class="dot dot2 ${botdot}"></span>
@@ -166,11 +162,11 @@ class EcobeeCard extends HTMLElement {
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_humidity">
-              <ha-icon icon="mdi:water-percent"></ha-icon>${humidity} %
+              <ha-icon icon="mdi:water-percent"></ha-icon>${stateObj.attributes.actual_humidity} %
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_temperature">
-              ${home_temperature}&deg
+              ${stateObj.attributes.current_temperature}&deg
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_div">
@@ -182,11 +178,13 @@ class EcobeeCard extends HTMLElement {
     }
 
     setConfig(config) {
-      if (!config.entity){
-        throw new Error('Please define entities');
+      if (!config.entity || config.entity.split(".")[0] !== "climate") {
+        throw new Error("Specify an entity from within the climate domain.");
       }
+
       this.config = config;
     }
 }
 
 customElements.define('ecobee-card', EcobeeCard);
+
