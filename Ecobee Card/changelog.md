@@ -1,3 +1,8 @@
+## v0.0.3
+- UI Fixes - In auto mode the setpoint circles would sometimes be shown outside the card.
+- Code cleanup
+- config error now looking for climate entity in lovelace-ui.yaml
+
 ## v0.0.2
 - UI Improvements
 fixed transparent text not rendering white
