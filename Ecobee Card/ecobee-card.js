@@ -106,9 +106,9 @@ class EcobeeCard extends HTMLElement {
         "Away": `<ha-icon icon="mdi:key-variant"></ha-icon> Away`,
       }
 
-      const midbotdot = transform_midbotdot[stateObj.attributes.operation_mode];
-      const midtopdot = transform_midtopdot[stateObj.attributes.operation_mode];
-      const topdot = transform_topdot[stateObj.attributes.operation_mode];
+      const midbotdot = transform_midbotdot[stateObj.state];
+      const midtopdot = transform_midtopdot[stateObj.state];
+      const topdot = transform_topdot[stateObj.state];
       const transform_spt_operation_mode = {
         "heat": `<span class="dot dot6 ${midtopdot}"></span>
                  <div class="setpoint setpoint_heatcool operation_heat_color">
@@ -138,9 +138,9 @@ class EcobeeCard extends HTMLElement {
         "off": ``,
       }
       const climate_mode = transform_climate_mode_icon[stateObj.attributes.climate_mode];
-      const icon_operation_mode = transform_operation_mode[stateObj.attributes.operation_mode];
-      const spt_operation_mode = transform_spt_operation_mode[stateObj.attributes.operation_mode];
-      const botdot = transform_botdot[stateObj.attributes.operation_mode];
+      const icon_operation_mode = transform_operation_mode[stateObj.state];
+      const spt_operation_mode = transform_spt_operation_mode[stateObj.state];
+      const botdot = transform_botdot[stateObj.state];
 
       this.content.innerHTML = `
         <div class="ecobee_card">
@@ -162,7 +162,7 @@ class EcobeeCard extends HTMLElement {
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_humidity">
-              <ha-icon icon="mdi:water-percent"></ha-icon>${stateObj.attributes.actual_humidity} %
+              <ha-icon icon="mdi:water-percent"></ha-icon>${stateObj.attributes.current_humidity} %
             </div>
             <div class="grid-item"></div>
             <div class="ecobee1 ecobee_temperature">
@@ -187,4 +187,3 @@ class EcobeeCard extends HTMLElement {
 }
 
 customElements.define('ecobee-card', EcobeeCard);
-
