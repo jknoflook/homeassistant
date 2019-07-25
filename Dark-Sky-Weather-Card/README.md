@@ -5,6 +5,7 @@ A card developed for Lovelace for weather forecasts with dark-sky
 
 
 **Requirements**
+
 season.sensor
 https://www.home-assistant.io/components/season/
 
