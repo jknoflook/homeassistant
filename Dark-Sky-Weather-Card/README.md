@@ -4,7 +4,7 @@ A card developed for Lovelace for weather forecasts with dark-sky
 ![dark-sky](https://github.com/jknoflook/homeassistant/blob/master/images/dark-sky-card.png)
 
 
-**Requirements**
+**Requirements:**
 
 season.sensor
 https://www.home-assistant.io/components/season/
@@ -25,7 +25,7 @@ winter.png
 
 
 
-**Options**
+**Options:**
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -42,4 +42,4 @@ Add in ui-lovelace.yaml OR in lovelace under configure ui -> raw config:
 
 In lovelace under Configure UI add a card -> select "Manual Card" and Enter:
 
-type: 'custom:dark-sky-weather-card'
+    type: 'custom:dark-sky-weather-card'
