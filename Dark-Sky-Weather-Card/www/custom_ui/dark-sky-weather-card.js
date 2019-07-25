@@ -31,7 +31,7 @@ class DarkSkyWeatherCard extends HTMLElement {
       "below_horizon": "night",
       "above_horizon": "day",
     }
-    const sunLocation = transformDayNight[hass.states[this.config.entity_sun].state];
+    const sunLocation = transformDayNight[hass.states["sun.sun"]];
     const weatherIcons = {
       'clear-day': 'sunny',
       'clear-night': 'nt_clear',
@@ -82,34 +82,35 @@ class DarkSkyWeatherCard extends HTMLElement {
     forecastDate5.setDate(forecastDate5.getDate()+5);
 
 
-    const currentConditions = hass.states[this.config.entity_current_conditions].state;
-    const humidity = hass.states[this.config.entity_humidity].state;
-    const pressure = Math.round(hass.states[this.config.entity_pressure].state);
-    const temperature = Math.round(hass.states[this.config.entity_temperature].state);
-    const visibility = hass.states[this.config.entity_visibility].state;
-    const windBearing = windDirections[(Math.round((hass.states[this.config.entity_wind_bearing].state / 360) * 16))];
-    const weathercardbackground = this.config.entity_background;
-    const windSpeed = Math.round(hass.states[this.config.entity_wind_speed].state);
+    const currentConditions = hass.states["sensor.dark_sky_icon"].state;
+    const humidity = hass.states["sensor.dark_sky_humidity"].state;
+    const pressure = Math.round(hass.states["sensor.dark_sky_pressure"].state);
+    const temperature = Math.round(hass.states["sensor.dark_sky_temperature"].state);
+    const visibility = hass.states["sensor.dark_sky_visibility"].state;
+    const windBearing = windDirections[(Math.round((hass.states["sensor.dark_sky_wind_bearing"].state / 360) * 16))];
+    const weathercardbackground = hass.states["sensor.season"].state;
+    const windSpeed = Math.round(hass.states["sensor.dark_sky_wind_speed"].state);
     const forecast1 = { date: forecastDate1,
-    				   condition: this.config.entity_forecast_icon_1,
-    				   temphigh: this.config.entity_forecast_high_temp_1,
-    				   templow:  this.config.entity_forecast_low_temp_1, };
+    				   condition: "sensor.dark_sky_icon_1d",
+    				   temphigh: "sensor.dark_sky_daytime_high_temperature_1d",
+    				   templow:  "sensor.dark_sky_overnight_low_temperature_1d", };
     const forecast2 = { date: forecastDate2,
-    				   condition: this.config.entity_forecast_icon_2,
-    				   temphigh: this.config.entity_forecast_high_temp_2,
-    				   templow:  this.config.entity_forecast_low_temp_2, };
+    				   condition: "sensor.dark_sky_icon_2d",
+    				   temphigh: "sensor.dark_sky_daytime_high_temperature_2d",
+    				   templow:  "sensor.dark_sky_overnight_low_temperature_2d", };
     const forecast3 = { date: forecastDate3,
-    				   condition: this.config.entity_forecast_icon_3,
-    				   temphigh: this.config.entity_forecast_high_temp_3,
-    				   templow:  this.config.entity_forecast_low_temp_3, };
+    				   condition: "sensor.dark_sky_icon_3d",
+    				   temphigh: "sensor.dark_sky_daytime_high_temperature_3d",
+    				   templow:  "sensor.dark_sky_overnight_low_temperature_3d", };
     const forecast4 = { date: forecastDate4,
-    				   condition: this.config.entity_forecast_icon_4,
-    				   temphigh: this.config.entity_forecast_high_temp_4,
-    				   templow:  this.config.entity_forecast_low_temp_4, };
+    				   condition: "sensor.dark_sky_icon_4d",
+    				   temphigh: "sensor.dark_sky_daytime_high_temperature_4d",
+    				   templow:  "sensor.dark_sky_overnight_low_temperature_4d", };
     const forecast5 = { date: forecastDate5,
-    				   condition: this.config.entity_forecast_icon_5,
-    				   temphigh: this.config.entity_forecast_high_temp_5,
-    				   templow:  this.config.entity_forecast_low_temp_5, };
+    				   condition: "sensor.dark_sky_icon_5d",
+    				   temphigh: "sensor.dark_sky_daytime_high_temperature_5d",
+    				   templow:  "sensor.dark_sky_overnight_low_temperature_5d", };
+
 
     const forecast = [forecast1,forecast2,forecast3,forecast4,forecast5];
 
@@ -117,7 +118,7 @@ class DarkSkyWeatherCard extends HTMLElement {
     this.content.innerHTML = `
 
 
-    <div style="background: url(/local/pictures/${weathercardbackground}) no-repeat; background-size: cover; margin: auto; padding-top: 2em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; position: relative">
+    <div style="background: url(/local/pictures/${weathercardbackground}.jpg) no-repeat; background-size: cover; margin: auto; padding-top: 2em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; position: relative">
     <div style="background: rgba(0, 0, 0, 0.55); /* Black background with transparency */">
     <div class="div" style="padding-left: 2%, padding-right: 2%">
       <div class="div div1">
@@ -149,24 +150,17 @@ class DarkSkyWeatherCard extends HTMLElement {
     </div></div></div>`;
   }
 
-  setConfig(config) {
-    if (!config.entity_current_conditions ||
-    		!config.entity_humidity ||
-    		!config.entity_pressure ||
-     		!config.entity_temperature ||
-    		!config.entity_visibility ||
-    		!config.entity_wind_bearing ||
-    		!config.entity_wind_speed ||
-        !config.entity_background) {
-      throw new Error('Please define entities');
-    }
-    this.config = config;
-  }
-
-  // @TODO: This requires more intelligent logic
   getCardSize() {
     return 3;
   }
+
+  setConfig(config) {
+    this.config = config;
+  }
+
 }
 
+
+
 customElements.define('dark-sky-weather-card', DarkSkyWeatherCard);
+
