@@ -6,17 +6,13 @@ A card developed for Lovelace for weather forecasts with dark-sky
 
 **Requirements:**
 
-season.sensor
-https://www.home-assistant.io/components/season/
+season.sensor      https://www.home-assistant.io/components/season/
 
-sun.sun
-https://www.home-assistant.io/components/sun/
+sun.sun      https://www.home-assistant.io/components/sun/
 
-dark-sky weather
-https://www.home-assistant.io/components/weather.darksky/
+dark-sky weather      https://www.home-assistant.io/components/weather.darksky/
 
-season backgrounds installed in:
-/www/pictures/
+season backgrounds installed in:    /www/pictures/
 
 spring.png
 summer.png
