@@ -55,12 +55,15 @@
 
 .operation_cool_color {
   color: #56C0EA;
+  fill: #56C0EA;
 }
 .operation_heat_color {
   color: orange;
+  fill: orange;
 }
 .operation_neutral_color {
   color: #ffffff;
+  fill: #ffffff;
 }
 .dot_cool_color {
   background-color: #56C0EA;
@@ -124,5 +127,3 @@
   align-self: center;
   background-color: rgba(0, 0, 0, 0.8);
 }
-
-
