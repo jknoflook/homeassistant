@@ -1,3 +1,10 @@
+## v0.0.4
+- UI Fixes - Auto mode had overlapping icons
+- UI Fixes - Fix temperature selection colors in auto to match Ecobee UI
+- Add state icon color changes to indicate running vs idle
+- Add support for displaying custom comfort preset names
+- Code cleanup
+
 ## v0.0.3
 - UI Fixes - In auto mode the setpoint circles would sometimes be shown outside the card.
 - Code cleanup
